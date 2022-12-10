@@ -101,9 +101,9 @@ const Register = () => {
                                     name='salutation'
                                     value={register.salutation}
                                     onChange={handleChange}
-                                    defaultValue='Anrede'
+                                    defaultValue=''
                                 >
-                                    <option value='Anrede' disabled>Anrede</option>
+                                    <option value='' disabled>Anrede</option>
                                     <option value='Frau'>Frau</option>
                                     <option value='Mann'>Herr</option>
                                 </select>
@@ -116,9 +116,9 @@ const Register = () => {
                                     name='academic_title'
                                     value={register.academic_title}
                                     onChange={handleChange}
-                                    defaultValue='Titel'
+                                    defaultValue=''
                                 >
-                                    <option value='Titel' disabled>Titel</option>
+                                    <option value='' disabled>Titel</option>
                                     <option value='Dr.'>Dr.</option>
                                     <option value='PD Dr.'>PD Dr.</option>
                                     <option value='Prof. Dr.'>Prof. Dr.</option>
@@ -161,9 +161,9 @@ const Register = () => {
                                     name='role'
                                     value={register.role}
                                     onChange={handleChange}
-                                    defaultValue='Rolle'
+                                    defaultValue=''
                                 >
-                                    <option value='Rolle' disabled>Rolle</option>
+                                    <option value='' disabled>Rolle</option>
                                     <option value='Assistenzärzt:in'>Assistenzärzt:in</option>
                                     <option value='Fachärzt:in'>Fachärzt:in</option>
                                     <option value='Oberärzt:in'>Oberärzt:in</option>
@@ -178,9 +178,9 @@ const Register = () => {
                                     name='user_specialty'
                                     value={register.user_specialty}
                                     onChange={handleChange}
-                                    defaultValue='Fachrichtung'
+                                    defaultValue=''
                                 >
-                                    <option value='Fachrichtung' disabled>Fachrichtung</option>
+                                    <option value='' disabled>Fachrichtung</option>
                                     <option value='Innere Medizin'>Innere Medizin</option>
                                     <option value='Kardiologie'>Kardiologie</option>
                                     <option value='Pneumologie'>Pneumologie</option>
