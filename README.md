@@ -26,7 +26,7 @@ React Testing Library  | Supertest
 Jest                   | Jest
 
 ## Architecture
-Get an overview of the [architecture of the app](/20221125_Architektur.pdf).
+Get an overview of the [architecture of the app](/Architecture.png).
 
 ## Prerequisites
 1. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
