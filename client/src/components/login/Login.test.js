@@ -19,8 +19,8 @@ describe('Login', () => {
         render(ui);
         expect(screen.getByText('CollNow')).toBeInTheDocument();
         expect(screen.getByText(/Du hast eine Frage/)).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('E-Mail-Adresse')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('E-Mail-Adresse')).toBeRequired();
+        expect(screen.getByRole('textbox', {name: 'E-Mail-Adresse'})).toBeInTheDocument();
+        expect(screen.getByRole('textbox', {name: 'E-Mail-Adresse'})).toBeRequired();
         expect(screen.getByPlaceholderText('Passwort')).toBeInTheDocument();
         expect(screen.getByPlaceholderText('Passwort')).toBeRequired();
         expect(screen.getAllByRole('button')).toHaveLength(2);
@@ -36,20 +36,20 @@ describe('Login', () => {
         expect(screen.getAllByPlaceholderText('Passwort')).toHaveLength(2);
         expect(screen.getByTestId('email')).toBeRequired();
         expect(screen.getByTestId('password')).toBeRequired();
-        expect(screen.getByPlaceholderText('Vorname')).toBeRequired();
-        expect(screen.getByPlaceholderText('Nachname')).toBeRequired();
+        expect(screen.getByRole('textbox', {name: 'Vorname'})).toBeRequired();
+        expect(screen.getByRole('textbox', {name: 'Nachname'})).toBeRequired();
         expect(screen.getAllByText('Registrieren')).toHaveLength(2);
         expect(screen.getAllByRole('combobox')).toHaveLength(4);
     });
 
     it('validates email input when user logs in', () => {
         render(ui);
-        userEvent.type(screen.getByPlaceholderText('E-Mail-Adresse'), '');
-        expect(screen.getByPlaceholderText('E-Mail-Adresse')).toBeInvalid();
-        userEvent.type(screen.getByPlaceholderText('E-Mail-Adresse'), 'user');
-        expect(screen.getByPlaceholderText('E-Mail-Adresse')).toBeInvalid();
-        userEvent.type(screen.getByPlaceholderText('E-Mail-Adresse'), 'user@test.com');
-        expect(screen.getByPlaceholderText('E-Mail-Adresse')).toBeValid();
+        userEvent.type(screen.getByRole('textbox', {name: 'E-Mail-Adresse'}), '');
+        expect(screen.getByRole('textbox', {name: 'E-Mail-Adresse'})).toBeInvalid();
+        userEvent.type(screen.getByRole('textbox', {name: 'E-Mail-Adresse'}), 'user');
+        expect(screen.getByRole('textbox', {name: 'E-Mail-Adresse'})).toBeInvalid();
+        userEvent.type(screen.getByRole('textbox', {name: 'E-Mail-Adresse'}), 'user@test.com');
+        expect(screen.getByRole('textbox', {name: 'E-Mail-Adresse'})).toBeValid();
     });
 
     it('validates email input when user registers', () => {
@@ -66,7 +66,7 @@ describe('Login', () => {
     it('alerts user that logs in if their password is incorrect', async () => {
         fetch.mockReject(() => Promise.reject(new Error('Unauthorized')));
         render(ui);
-        userEvent.type(screen.getByPlaceholderText('E-Mail-Adresse'), 'user@test.com');
+        userEvent.type(screen.getByRole('textbox', {name: 'E-Mail-Adresse'}), 'user@test.com');
         userEvent.type(screen.getByPlaceholderText('Passwort'), 'password');
         await userEvent.click(screen.getByRole('button', {name: 'Anmelden' }));
         expect(fetch).toHaveBeenCalledTimes(1);
@@ -79,8 +79,8 @@ describe('Login', () => {
         userEvent.click(screen.getByRole('button', {name: 'Registrieren' }));
         userEvent.type(screen.getByTestId('email'), 'user@test.com');
         userEvent.type(screen.getByTestId('password'), 'password');
-        userEvent.type(screen.getByPlaceholderText('Vorname'), 'Max');
-        userEvent.type(screen.getByPlaceholderText('Nachname'), 'Mustermann');
+        userEvent.type(screen.getByRole('textbox', {name: 'Vorname'}), 'Max');
+        userEvent.type(screen.getByRole('textbox', {name: 'Nachname'}), 'Mustermann');
         await userEvent.click(screen.getByTestId('register'));
         expect(fetch).toHaveBeenCalledTimes(1);
         expect(alert).toHaveBeenCalledTimes(1);        

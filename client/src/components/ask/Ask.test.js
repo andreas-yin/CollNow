@@ -1,5 +1,5 @@
 import { renderWithProviders as render } from '../../redux/utils/test-utils';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Ask from './Ask';
@@ -19,9 +19,8 @@ describe('Ask', () => {
         expect(screen.getByText('Patientendaten')).toBeInTheDocument();
         expect(screen.getByText('Aus KIS importieren')).toBeInTheDocument();
         expect(screen.getByText('Beschreibung deines Problems')).toBeInTheDocument();
-        expect(screen.getByText('Tags')).toBeInTheDocument();
+        waitFor(() => expect(screen.getByText('Tags')).toBeInTheDocument());
         expect(screen.getByText('Frage posten')).toBeInTheDocument();
-        expect(screen.getByText('Frage verwerfen')).toBeInTheDocument();     
     });
 
     it('validates the required title input', () => {

@@ -40,7 +40,7 @@ const Ask = () => {
       const jsonData = await response.json();
       if (jsonData) navigate('/questions');
     } catch (err) {
-      console.error(err.message);      
+      console.error(err.message);
     }
   };
 
@@ -67,17 +67,20 @@ const Ask = () => {
                 title='Titel'
                 text='Formuliere deine Frage präzise. Stell dir vor, du rufst deinen Oberarzt an und stellst ihm dein Problem in einem Satz vor.'
               />
-              <label className='w-full' aria-label='Titel der Frage'>
-                <input
-                  onChange={handleChange}
-                  value={question.title}
-                  name='title'
-                  className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
-                  placeholder='z. B. Auf welches orale Antibiotikum kann ich Pip/Taz bei einer Pneumonie umstellen?'
-                  type="text"
-                  required
-                />
+              <label htmlFor='title' className='hidden'>
+                Titel der Frage
               </label>
+              <input
+                id='title'
+                onChange={handleChange}
+                value={question.title}
+                name='title'
+                className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
+                placeholder='z. B. Auf welches orale Antibiotikum kann ich Pip/Taz bei einer Pneumonie umstellen?'
+                type="text"
+                required
+              />
+
             </section>
 
 
@@ -197,17 +200,20 @@ const Ask = () => {
               />
 
               {/* Description field */}
-              <label className="w-full" aria-label='Beschreibung der Frage'>
-                <textarea
-                  onChange={handleChange}
-                  value={question.description}
-                  name='description'
-                  className="bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
-                  rows='10'
-                  required
-                >
-                </textarea>
+              <label htmlFor='description' className='hidden'>
+                Beschreibung der Frage
               </label>
+              <textarea
+                id='description'
+                onChange={handleChange}
+                value={question.description}
+                name='description'
+                className="bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
+                rows='10'
+                required
+              >
+              </textarea>
+
 
             </section>
 
@@ -220,15 +226,18 @@ const Ask = () => {
               />
 
               {/* Tags field */}
-              <label className="w-full" aria-label='Tags'>
-                <input
-                  onChange={handleChange}
-                  value={question.tags}
-                  name='tags'
-                  className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
-                  placeholder='z. B. Empagliflozin, SGLT2-Inhibitoren, Herzinsuffizienz'
-                  type="text" />
+              <label htmlFor='tags' className="hidden">
+                Tags
               </label>
+              <input
+                id='tags'
+                onChange={handleChange}
+                value={question.tags}
+                name='tags'
+                className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
+                placeholder='z. B. Empagliflozin, SGLT2-Inhibitoren, Herzinsuffizienz'
+                type="text" />
+
 
             </section>
 

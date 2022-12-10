@@ -57,7 +57,11 @@ const Login = () => {
 
                 <div className='mt-14 sm:mt-24 mb-6 w-96 bg-white border border-slate-200 rounded-lg px-4 py-4 shadow-md flex flex-col space-y-4'>
                     <form className='flex flex-col space-y-4' onSubmit={submitLogin}>
+                        <label htmlFor='email' className='hidden'>
+                            E-Mail-Adresse
+                        </label>
                         <input
+                            id='email'
                             onChange={handleChange}
                             type="email"
                             placeholder='E-Mail-Adresse'
@@ -66,14 +70,18 @@ const Login = () => {
                             value={login.email}
                             required
                         />
+                        <label htmlFor='password' className='hidden'>
+                            Password
+                        </label>
                         <input
+                            id='password'
                             onChange={handleChange}
                             type="password"
                             placeholder='Passwort'
                             className='px-4 py-4 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-indigo-600'
                             name='password'
                             value={login.password}
-                            required
+                            required                            
                         />
                         <button className='px-4 py-4 w-full text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg font-semibold text-lg' type='submit'>
                             Anmelden
