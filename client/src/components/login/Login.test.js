@@ -26,9 +26,11 @@ describe('Login', () => {
         expect(screen.getAllByRole('button')).toHaveLength(2);
         expect(screen.getByRole('button', {name: 'Anmelden' })).toBeInTheDocument();
         expect(screen.getByRole('button', {name: 'Registrieren' })).toBeInTheDocument();
+    });
 
+    it('renders Register dialog', () => {
+        render(ui);
         userEvent.click(screen.getByRole('button', {name: 'Registrieren' }));
-
         expect(screen.getByText('Registriere dich')).toBeInTheDocument();
         expect(screen.getAllByPlaceholderText('E-Mail-Adresse')).toHaveLength(2);
         expect(screen.getAllByPlaceholderText('Passwort')).toHaveLength(2);
