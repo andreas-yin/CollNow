@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { changeSearchTerm } from '../../redux/features/searchSlice';
 
+
 const Searchbar = () => {
     const [searchInput, setSearchInput] = useState('');
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();   
 
     const submitSearchTerm = e => {
         if (e.keyCode === 13) {
             dispatch(changeSearchTerm(searchInput));
-            navigate('/results');
-            setSearchInput('');
+            navigate('/results'); 
+            setSearchInput('');             
         }
     };
 
