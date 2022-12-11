@@ -237,7 +237,18 @@ const Ask = () => {
                 className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
                 placeholder='z. B. Empagliflozin, SGLT2-Inhibitoren, Herzinsuffizienz'
                 type="text" />
-
+              {question.tags !== '' && <Fragment>
+                <h3 className="text-lg text-slate-500 font-medium pt-2">Deine Tags:</h3>
+                <ul className='flex flex-wrap gap-4 my-4 text-sm'>
+                  {question.tags.split(', ').map((tag, index) => {
+                    return (
+                      <li key={index} className='bg-indigo-100 text-indigo-400 rounded px-2 py-1'>
+                        {tag}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Fragment>}
 
             </section>
 
