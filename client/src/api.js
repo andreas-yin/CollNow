@@ -25,7 +25,7 @@ export const apiGetContent = async (questionId, contentType) => {
 };
 
 
-//Update Vote requests (increment or decrement a question vote or an answer vote by 1)
+//Update Vote requests (increment or decrement a question vote or an answer vote)
 export const apiChangeVote = async (interval, voteType, document, questionId) => {
     const body = { [voteType]: document[voteType] + interval };
 
