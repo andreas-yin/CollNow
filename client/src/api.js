@@ -61,7 +61,7 @@ export const apiCreateDocument = async (document, user, questionId) => {
 };
 
 
-//Search requests (search all questions related to a search term)
+//Search requests (search all questions and retrieve those related to a search term)
 export const apiSearch = async (searchTerm) => {
     const body = { searchTerm };
     const response = await fetch(`${endpoint}/search`, {
