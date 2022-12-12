@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Dialog, Box } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { signin, signout } from '../../redux/features/userSlice';
+import { apiAuth } from '../../api';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -27,14 +28,8 @@ const Register = () => {
 
     const submitRegister = async e => {
         e.preventDefault();
-        try {
-            const body = { ...register };
-            const response = await fetch('http://localhost:5000/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const user = await response.json();
+        try {            
+            const user = await apiAuth(register, 'register');
             dispatch(signin(user)); //save user in Redux state object
             if (user) navigate('/questions');
 

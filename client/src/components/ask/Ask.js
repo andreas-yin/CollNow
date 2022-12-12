@@ -5,6 +5,7 @@ import SectionHeader from "./SectionHeader";
 import Navbar from '../Navbar';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/features/userSlice';
+import { apiCreateDocument } from '../../api';
 
 const Ask = () => {
   const user = useSelector(selectUser);
@@ -30,14 +31,8 @@ const Ask = () => {
 
   const submitQuestion = async e => {
     e.preventDefault();
-    try {
-      const body = { ...question, user_id: user.user_id };
-      const response = await fetch('http://localhost:5000/questions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const jsonData = await response.json();
+    try {     
+      const jsonData = await apiCreateDocument(question, user);
       if (jsonData) navigate('/questions');
     } catch (err) {
       console.error(err.message);

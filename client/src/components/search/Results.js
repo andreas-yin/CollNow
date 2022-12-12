@@ -4,6 +4,7 @@ import NumberOfAnswers from '../home/NumberOfAnswers';
 import Navbar from '../Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSearchTerm, changeSearchTerm } from '../../redux/features/searchSlice';
+import { apiSearch } from '../../api';
 
 
 const Results = () => {
@@ -15,14 +16,7 @@ const Results = () => {
     const getQuestions = async () => {
         try {
             setIsLoading(true);
-            const body = { searchTerm };
-            const response = await fetch('http://localhost:5000/search', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const jsonData = await response.json();
-
+            const jsonData = await apiSearch(searchTerm);
             setIsLoading(false);
             setQuestions(jsonData);
         } catch (err) {

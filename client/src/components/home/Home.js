@@ -4,6 +4,7 @@ import NumberOfAnswers from './NumberOfAnswers';
 import Navbar from '../Navbar';
 import { useDispatch } from 'react-redux';
 import { changeSearchTerm } from '../../redux/features/searchSlice';
+import { apiGetContent } from '../../api';
 
 const Home = () => {
     const [questions, setQuestions] = useState([]); 
@@ -12,10 +13,8 @@ const Home = () => {
 
     const getQuestions = async () => {
         try {
-            setIsLoading(true);
-            const response = await fetch('http://localhost:5000/questions');
-            const jsonData = await response.json();
-
+            setIsLoading(true);        
+            const jsonData = await apiGetContent();
             setIsLoading(false);
             setQuestions(jsonData);            
         } catch (err) {

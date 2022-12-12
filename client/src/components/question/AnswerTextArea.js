@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/features/userSlice';
+import { apiCreateDocument } from '../../api';
 
 const AnswerTextArea = ({ questionId }) => {
   const user = useSelector(selectUser);
@@ -17,17 +18,11 @@ const AnswerTextArea = ({ questionId }) => {
   const submitAnswer = async e => {
     e.preventDefault();
     try {
-      const body = { ...answer, user_id: user.user_id };
-      const response = await fetch(`http://localhost:5000/questions/${questionId}/answers`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const jsonData = await response.json();
+      const jsonData = await apiCreateDocument(answer, user, questionId);
       if (jsonData) navigate(`/questions/${questionId}`, { state: answer });
       setAnswer({ answer: '', user_id: '' });
     } catch (err) {
-      console.error(err.message);      
+      console.error(err.message);
     }
   };
 
@@ -48,7 +43,7 @@ const AnswerTextArea = ({ questionId }) => {
           className="bg-white w-full border border-slate-300 rounded mt-1 py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-indigo-600 focus:ring-indigo-600 focus:ring-1 sm:text-sm"
           rows='8'
           required
-          >
+        >
         </textarea>
       </label>
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Register from './Register';
 import { useDispatch } from 'react-redux';
 import { signin, signout } from '../../redux/features/userSlice';
+import { apiAuth } from '../../api';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -17,14 +18,8 @@ const Login = () => {
 
     const submitLogin = async e => {
         e.preventDefault();
-        try {
-            const body = { ...login };
-            const response = await fetch('http://localhost:5000/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const user = await response.json();
+        try {            
+            const user = await apiAuth(login, 'login');
             dispatch(signin(user)); //save user in Redux state object
             if (user) navigate('/questions');
 

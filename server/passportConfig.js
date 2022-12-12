@@ -1,5 +1,4 @@
 const LocalStrategy = require('passport-local');
-const { updateAnswerVote } = require('./db');
 const { emailExists, createUser, matchPassword } = require('./dbUsersHelper');
 
 module.exports = (passport) => {

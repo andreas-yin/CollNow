@@ -6,7 +6,8 @@ const LogoutLink = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(signout());       
+        dispatch(signout());   
+
     };
 
     return (

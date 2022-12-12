@@ -1,19 +1,13 @@
 import { Fragment } from 'react';
+import { apiChangeVote } from '../../api';
 
 const QuestionVote = ({ question, updateState }) => {
 
     const increase = async (e) => {
         e.preventDefault();
         try {
-            const body = { question_vote: question.question_vote + 1 };
-            const response = await fetch(`http://localhost:5000/questions/${question.question_id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const jsonData = await response.json();
+            const jsonData = await apiChangeVote(1, 'question_vote', question);
             const updatedVote = jsonData.question_vote;
-
             updateState(updatedVote);
         } catch (err) {
             console.error(err.message);
@@ -23,15 +17,8 @@ const QuestionVote = ({ question, updateState }) => {
     const decrease = async (e) => {
         e.preventDefault();
         try {
-            const body = { question_vote: question.question_vote - 1 };
-            const response = await fetch(`http://localhost:5000/questions/${question.question_id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const jsonData = await response.json();
+            const jsonData = await apiChangeVote(-1, 'question_vote', question);
             const updatedVote = jsonData.question_vote;
-
             updateState(updatedVote);
         } catch (err) {
             console.error(err.message);

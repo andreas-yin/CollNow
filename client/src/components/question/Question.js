@@ -8,6 +8,7 @@ import Navbar from '../Navbar';
 import { useDispatch } from 'react-redux';
 import { changeSearchTerm } from '../../redux/features/searchSlice';
 import QuestionNotFound from './QuestionNotFound';
+import { apiGetContent } from '../../api';
 
 
 const Question = () => {
@@ -16,42 +17,33 @@ const Question = () => {
     const [error, setError] = useState(null);
     const [question, setQuestion] = useState({});
     const [tags, setTags] = useState([]);
-    const [answers, setAnswers] = useState([]);  
+    const [answers, setAnswers] = useState([]);
     const { state: newAnswer } = useLocation();
     const dispatch = useDispatch();
 
-    const getQuestion = async () => {
+    const getContent = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/questions/${questionId}`);
-            const jsonData = await response.json();
-            const splitTags = jsonData.tags.split(', ');
+            const questionData = await apiGetContent(questionId);
+            const answersData = await apiGetContent(questionId, 'answers');
 
-            setQuestion(jsonData);
-            setTags(splitTags);            
+            const splitTags = questionData.tags.split(', ');
+
+            setQuestion(questionData);
+            setTags(splitTags);
+            setAnswers(answersData);
         } catch (err) {
             console.error(err.message);
             setError(err);
         }
-    };
-
-    const getAnswers = async () => {
-        try {
-            const response = await fetch(`http://localhost:5000/questions/${questionId}/answers`);
-            const jsonData = await response.json();
-
-            setAnswers(jsonData);
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
+    };   
 
     useEffect(() => {
-        getQuestion();
-        getAnswers();
+        getContent();       
         setReadyForRender(true);
     }, [newAnswer]);
 
 
+    //Initiate a search with the clicked tag being the search term
     const handleTagClick = (tag) => {
         dispatch(changeSearchTerm(tag));
     };

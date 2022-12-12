@@ -1,4 +1,5 @@
 import { useState, Fragment } from 'react';
+import { apiChangeVote } from '../../api';
 
 const AnswerVote = ({ answer, questionId }) => {
     const [answer_vote, setAnswer_vote] = useState(answer.answer_vote);
@@ -6,15 +7,8 @@ const AnswerVote = ({ answer, questionId }) => {
     const increaseAnswerVote = async (e) => {
         e.preventDefault();
         try {
-            const body = { answer_vote: answer_vote + 1 };
-            const response = await fetch(`http://localhost:5000/questions/${questionId}/answers/${answer.answer_id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const jsonData = await response.json();
+            const jsonData = await apiChangeVote(1, 'answer_vote', answer, questionId);
             const updatedVote = jsonData.answer_vote;
-
             setAnswer_vote(updatedVote);
         } catch (err) {
             console.error(err.message);
@@ -24,15 +18,8 @@ const AnswerVote = ({ answer, questionId }) => {
     const decreaseAnswerVote = async (e) => {
         e.preventDefault();
         try {
-            const body = { answer_vote: answer_vote - 1 };
-            const response = await fetch(`http://localhost:5000/questions/${questionId}/answers/${answer.answer_id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            });
-            const jsonData = await response.json();
+            const jsonData = await apiChangeVote(-1, 'answer_vote', answer, questionId);
             const updatedVote = jsonData.answer_vote;
-
             setAnswer_vote(updatedVote);
         } catch (err) {
             console.error(err.message);

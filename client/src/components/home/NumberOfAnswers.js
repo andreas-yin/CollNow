@@ -1,21 +1,20 @@
 import { useState, useEffect, Fragment } from 'react';
+import { apiGetContent } from '../../api';
 
 const NumberOfAnswers = ({ questionId }) => {
     const [number, setNumber] = useState(0);
 
     const getNumberOfAnswers = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/questions/${questionId}/answers`);
-            const jsonData = await response.json();
-
-            setNumber(jsonData.length);            
+            const jsonData = await apiGetContent(questionId, 'answers');
+            setNumber(jsonData.length);
         } catch (err) {
             console.error(err.message);
         }
     };
 
     useEffect(() => {
-        getNumberOfAnswers();       
+        getNumberOfAnswers();
     }, []);
 
 
