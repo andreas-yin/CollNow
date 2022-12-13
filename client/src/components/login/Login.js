@@ -25,7 +25,7 @@ const Login = () => {
 
         } catch (err) {
             console.error(err.message);
-            dispatch(signout());
+            dispatch(signout());            
             alert('Ihr Passwort ist falsch oder dieses Konto existiert nicht. Bitte versuchen Sie es erneut oder registrieren Sie sich.');
         }
     };
