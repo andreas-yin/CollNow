@@ -6,7 +6,7 @@ import ListAnswers from './ListAnswers';
 import AnswerTextArea from './AnswerTextArea';
 import Navbar from '../Navbar';
 import { useDispatch } from 'react-redux';
-import { changeSearchTerm } from '../../redux/features/searchSlice';
+import { tagClicked } from '../../redux/features/searchSlice';
 import QuestionNotFound from './QuestionNotFound';
 import { apiGetContent } from '../../api';
 
@@ -45,7 +45,7 @@ const Question = () => {
 
     //Initiate a search with the clicked tag being the search term
     const handleTagClick = (tag) => {
-        dispatch(changeSearchTerm(tag));
+        dispatch(tagClicked(tag));
     };
 
 

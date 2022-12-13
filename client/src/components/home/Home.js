@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NumberOfAnswers from './NumberOfAnswers';
 import Navbar from '../Navbar';
 import { useDispatch } from 'react-redux';
-import { changeSearchTerm } from '../../redux/features/searchSlice';
+import { tagClicked } from '../../redux/features/searchSlice';
 import { apiGetContent } from '../../api';
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
     }, []);
 
     const handleTagClick = (tag) => {
-        dispatch(changeSearchTerm(tag));
+        dispatch(tagClicked(tag));
     };
 
 
