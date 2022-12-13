@@ -13,8 +13,7 @@ CREATE TABLE questions(
     description VARCHAR NOT NULL CHECK (description <> ''),
     tags VARCHAR(500),    
     question_vote INTEGER DEFAULT 0,
-    asked_on TIMESTAMP,
-    asked_on_string VARCHAR(30)
+    asked_on TIMESTAMPTZ    
 );
 
 CREATE TABLE answers(
@@ -23,8 +22,7 @@ CREATE TABLE answers(
     user_id INTEGER REFERENCES users(user_id),
     answer VARCHAR NOT NULL CHECK (answer <> ''),
     answer_vote INTEGER DEFAULT 0,
-    answered_on TIMESTAMP,
-    answered_on_string VARCHAR(30)
+    answered_on TIMESTAMPTZ   
 );
 
 CREATE TABLE users(

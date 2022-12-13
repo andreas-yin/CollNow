@@ -10,8 +10,8 @@ const pool = new Pool({
 
 const createQuestion = async (title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, user_id) => {
     const { rows } = await pool.query(
-        `INSERT INTO questions(title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, asked_on, asked_on_string, user_id) 
-        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, TO_CHAR(CURRENT_TIMESTAMP, 'DD.MM.YYYY um HH24:MI Uhr'), $10) 
+        `INSERT INTO questions(title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, asked_on, user_id) 
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, $10) 
         RETURNING *`,
         [title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, user_id]);
     return rows[0];
@@ -19,7 +19,7 @@ const createQuestion = async (title, specialty, setting, age, sex, primary_dx, s
 
 const getAllQuestions = async () => {
     const { rows } = await pool.query(
-        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, asked_on_string, 
+        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, TO_CHAR(asked_on, 'DD.MM.YYYY um HH24:MI Uhr') AS asked_on_string, 
         questions.user_id, academic_title, first_name, last_name, role, user_specialty 
         FROM questions
         INNER JOIN users
@@ -30,7 +30,7 @@ const getAllQuestions = async () => {
 
 const getQuestion = async (questionId) => {
     const { rows } = await pool.query(
-        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, asked_on_string, 
+        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, TO_CHAR(asked_on, 'DD.MM.YYYY um HH24:MI Uhr') AS asked_on_string, 
         questions.user_id, academic_title, first_name, last_name, role, user_specialty 
         FROM questions
         INNER JOIN users
@@ -48,7 +48,7 @@ const updateQuestionVote = async (question_vote, questionId) => {
 
 const getAllAnswersToQuestion = async (questionId) => {
     const { rows } = await pool.query(
-        `SELECT answer_id, question_id, answer, answer_vote, answered_on, answered_on_string,
+        `SELECT answer_id, question_id, answer, answer_vote, answered_on, TO_CHAR(answered_on, 'DD.MM.YYYY um HH24:MI Uhr') AS answered_on_string,
         answers.user_id, academic_title, first_name, last_name, role, user_specialty
         FROM answers 
         INNER JOIN users
@@ -70,8 +70,8 @@ const updateAnswerVote = async (answer_vote, questionId, answerId) => {
 
 const createAnswer = async (questionId, answer, user_id) => {
     const { rows } = await pool.query(
-        `INSERT INTO answers(question_id, answer, answered_on, answered_on_string, user_id) 
-        VALUES($1, $2, CURRENT_TIMESTAMP, TO_CHAR(CURRENT_TIMESTAMP, 'DD.MM.YYYY um HH24:MI Uhr'), $3) 
+        `INSERT INTO answers(question_id, answer, answered_on, user_id) 
+        VALUES($1, $2, CURRENT_TIMESTAMP, $3) 
         RETURNING *`,
         [questionId, answer, user_id]);
     return rows[0];
@@ -79,7 +79,7 @@ const createAnswer = async (questionId, answer, user_id) => {
 
 const searchQuestions = async (searchTerm) => {
     const { rows } = await pool.query(
-        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, asked_on_string, 
+        `SELECT question_id, title, specialty, setting, age, sex, primary_dx, secondary_dx, description, tags, question_vote, asked_on, TO_CHAR(asked_on, 'DD.MM.YYYY um HH24:MI Uhr') AS asked_on_string, 
         questions.user_id, academic_title, first_name, last_name, role, user_specialty 
         FROM questions
         INNER JOIN users
