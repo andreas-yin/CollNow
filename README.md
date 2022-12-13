@@ -29,9 +29,9 @@ Jest                   | Jest
 Get an overview of the [architecture of the app](/Architecture.png).
 
 ## Prerequisites
-1. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-2. [nodemon](https://www.npmjs.com/package/nodemon)
-3. Install [PostgreSQL](https://www.postgresql.org/download/) if you haven't already.
+1. [Node.js](https://nodejs.org/en/) version ≥ 16.18.0 
+2. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version ≥ 8.19.2
+3. [PostgreSQL](https://www.postgresql.org/download/) version ≥ 15
 4. Download a ZIP file of all the files of this app.
 5. Unzip it.
 6. Open the command line and go to the root directory of the app.
@@ -64,7 +64,7 @@ Open the command line and go to the root directory of the app.
 1. Start the Node/Express server:
 ```
 cd server/
-nodemon server
+node server.js
 ```
 
 2. Start the React server
